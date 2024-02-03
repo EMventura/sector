@@ -11,7 +11,6 @@ int birth_cloud_interval(double tBC, double *ageStep, int nAgeStep) {
         return bisection_search(tBC, ageStep, nAgeStep) + 1;
 }
 
-
 void init_templates_special(sed_params_t *spectra, double tBC, int approx) {
     /* Special templates are for birth cloud 
      * Dimension: metallicity × wavelength
@@ -101,7 +100,7 @@ void init_templates_special(sed_params_t *spectra, double tBC, int approx) {
     pInBC = inBC;
     pOutBC = outBC;
     for(iZ = 0; iZ < nMaxZ; ++iZ) {
-        interpZ = (minZ + iZ + 1.)/2000.;
+        interpZ = (minZ + iZ + 1.)/1000.;
         for(iF = 0; iF < nFlux; ++iF) {
             pInBC[iF] = interp(interpZ, Z, refInBC + iF*nZ, nZ);
             pOutBC[iF] = interp(interpZ, Z, refOutBC + iF*nZ, nZ);

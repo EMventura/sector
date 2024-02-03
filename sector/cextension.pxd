@@ -18,6 +18,7 @@ cdef extern from "clib/sector.h":
         int *indices
         csp_t *histories
         llong_t *ids
+        int population
 
     ctypedef struct sed_params_t:
         # Raw templates
@@ -62,6 +63,7 @@ cdef extern from "clib/sector.h":
 
     void add_Lyman_absorption(double *target, double *waves, int nWaves, double z)
     void init_templates_raw(sed_params_t *spectra, char *fName)
+    void init_templates_rawIII(sed_params_t *spectra, char *fName)
     void shrink_templates_raw(sed_params_t *spectra, double maxAge)
     void init_filters(
         sed_params_t *spectra, double *betaBands, int nBeta, double *restBands, int nRest,
@@ -81,5 +83,5 @@ cdef extern from "clib/sector.h":
 cdef extern from "clib/sector.h" nogil:
     double *composite_spectra_cext(
         sed_params_t *spectra, gal_params_t *galParams,
-        dust_params_t *dustParams, short outType, short approx, short nThread
+        dust_params_t *dustParams, short outType, short approx, short nThread, int population
     )

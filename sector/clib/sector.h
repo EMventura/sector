@@ -33,6 +33,7 @@ typedef struct gal_params_t {
     int *indices;
     csp_t *histories;
     llong_t *ids;
+    int population;
 } gal_params_t;
 
 
@@ -85,18 +86,21 @@ typedef struct dust_params_t {
 
 #ifndef _SECTOR_
 void init_templates_raw(sed_params_t *spectra, char *fName);
+void init_templates_rawIII(sed_params_t *spectra, char *fName);
 void init_filters(sed_params_t *spectra,
                   double *betaBands, int nBeta, double *restBands, int nRest,
                   double *obsTrans, double *obsWaves, int *nObsWaves, int nObs, double z);
 void shrink_templates_raw(sed_params_t *spectra, double maxAge);
 void init_templates_integrated(sed_params_t *spectra);
+void init_templates_interpolate(sed_params_t *spectra);
 void init_templates_working(sed_params_t *spectra, csp_t *pHistories,
                             dust_params_t *dustParams, int iG);
+void init_templates_workingIII(sed_params_t *spectra);
 void fit_UV_slope(double *pTarget, double *pFit, int nGal, int nFlux,
                   double *logWaves, int nFit, int nR);
 double *composite_spectra_cext(sed_params_t *spectra,
                                gal_params_t *galParams, dust_params_t *dustParams,
-                               short outType, short approx, short nThread);
+                               short outType, short approx, short nThread, int population);
 #endif
 
 #ifndef _SPECTRA_
@@ -106,8 +110,10 @@ void init_filters(sed_params_t *spectra,
                   double *betaBands, int nBeta, double *restBands, int nRest,
                   double *obsTrans, double *obsWaves, int *nObsWaves, int nObs, double z);
 void init_templates_integrated(sed_params_t *spectra);
+void init_templates_interpolate(sed_params_t *spectra);
 void init_templates_working(sed_params_t *spectra, csp_t *pHistories,
                                    dust_params_t *dustParams, int iG);
+void init_templates_workingIII(sed_params_t *spectra);
 void free_templates_raw(sed_params_t *spectra);
 void free_filters(sed_params_t *spectra);
 #endif
